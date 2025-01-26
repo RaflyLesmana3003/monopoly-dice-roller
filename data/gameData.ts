@@ -94,7 +94,14 @@ export const rewards = [
   "Select a challenge and make it harder for someone else."
 ]
 
-export const punishments = [
+export const punishments = [  
+  "Take a surprise card.",
+  "Take a surprise card.",
+  "Take a surprise card.",
+  "Take a surprise card.",
+  "Take a surprise card.",  
+  "Take a surprise card.",
+  "Take a surprise card.",
   "Lose your next two turns, and everyone gets to choose a task for you to complete during those turns.",
   "Speak only in rhymes for the next 5 rounds. If you mess up, you take 3 drinks and lose your next turn.",
   "Spin around 20 times, then try to walk in a straight line. If you stumble, you take a drink and lose your next turn.",
