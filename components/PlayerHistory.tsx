@@ -14,6 +14,7 @@ function HistoryItemContent({ item }: { item: HistoryItem }) {
         {item.total && <span className="text-sm font-medium text-primary">Total: {item.total}</span>}
       </div>
       <p className="text-sm mb-2">{item.description}</p>
+      {item.comment && <p className="text-sm italic text-accent mb-2">{item.comment}</p>}
       {item.relatedEvents &&
         item.relatedEvents.map((relatedItem, index) => (
           <div key={index} className="ml-4 mt-2">

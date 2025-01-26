@@ -7,10 +7,10 @@ import { challenges, rewards, punishments } from "@/data/gameData"
 interface ChallengePopupProps {
   isOpen: boolean
   onClose: (success: boolean) => void
+  challenge: string
 }
 
-export function ChallengePopup({ isOpen, onClose }: ChallengePopupProps) {
-  const [challenge] = useState(challenges[Math.floor(Math.random() * challenges.length)])
+export function ChallengePopup({ isOpen, onClose, challenge }: ChallengePopupProps) {
   const [reward] = useState(rewards[Math.floor(Math.random() * rewards.length)])
   const [punishment] = useState(punishments[Math.floor(Math.random() * punishments.length)])
 

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Dices } from "lucide-react"
 import confetti from "canvas-confetti"
 import { challenges, rewards, punishments } from "@/data/gameData"
+import { rollComments } from "@/data/rollComments"
 
 export interface HistoryItem {
   type: "roll" | "challenge" | "reward" | "punishment"
@@ -16,6 +17,7 @@ export interface HistoryItem {
   timestamp: number
   relatedEvents?: HistoryItem[]
   total?: number
+  comment?: string
 }
 
 interface DiceRollerProps {
@@ -29,15 +31,17 @@ export function DiceRoller({ onHistoryUpdate, playerHistory }: DiceRollerProps) 
   const [showChallenge, setShowChallenge] = useState(false)
   const [currentChallenge, setCurrentChallenge] = useState("")
   const [doubleType, setDoubleType] = useState<string | null>(null)
+  const [rollComment, setRollComment] = useState<string | null>(null)
   const [scope, animate] = useAnimate()
 
-  const addHistoryItem = (type: HistoryItem["type"], description: string, total?: number) => {
+  const addHistoryItem = (type: HistoryItem["type"], description: string, total?: number, comment?: string) => {
     const newItem: HistoryItem = {
       type,
       description,
       timestamp: Date.now(),
       relatedEvents: [],
       total,
+      comment,
     }
 
     if (type === "roll") {
@@ -57,6 +61,7 @@ export function DiceRoller({ onHistoryUpdate, playerHistory }: DiceRollerProps) 
 
   const rollDice = () => {
     setIsRolling(true)
+    setRollComment(null)
     const rollDuration = 2000 // 2 seconds of rolling animation
     const intervalDuration = 100 // Change dice values every 100ms during rolling
 
@@ -71,7 +76,12 @@ export function DiceRoller({ onHistoryUpdate, playerHistory }: DiceRollerProps) 
       setDice(finalDice)
       setIsRolling(false)
 
-      addHistoryItem("roll", `Rolled ${finalDice[0]} and ${finalDice[1]}`, total)
+      // Generate roll comment
+      const comments = rollComments[total as keyof typeof rollComments]
+      const comment = comments[Math.floor(Math.random() * comments.length)]
+      setRollComment(comment)
+
+      addHistoryItem("roll", `Rolled ${finalDice[0]} and ${finalDice[1]}`, total, comment)
 
       // Check for doubles and trigger animations
       if (finalDice[0] === finalDice[1]) {
@@ -175,6 +185,16 @@ export function DiceRoller({ onHistoryUpdate, playerHistory }: DiceRollerProps) 
             </motion.div>
           )}
         </AnimatePresence>
+        {rollComment && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="text-lg font-medium text-accent text-center"
+          >
+            {rollComment}
+          </motion.div>
+        )}
         {doubleType && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
