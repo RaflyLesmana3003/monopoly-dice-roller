@@ -114,6 +114,9 @@ export default function Home() {
                 <CardTitle>{players[currentPlayerIndex].name}&apos;s Turn</CardTitle>
               </CardHeader>
               <CardContent>
+                <Button onClick={nextPlayer} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+                  Next Player
+                </Button>
                 <DiceRoller
                   key={currentPlayerIndex}
                   onHistoryUpdate={updatePlayerHistory}
@@ -121,9 +124,6 @@ export default function Home() {
                 />
               </CardContent>
               <CardFooter>
-                <Button onClick={nextPlayer} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                  Next Player
-                </Button>
               </CardFooter>
             </Card>
           </motion.div>
