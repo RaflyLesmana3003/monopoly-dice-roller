@@ -114,7 +114,7 @@ export default function Home() {
                 <CardTitle>{players[currentPlayerIndex].name}&apos;s Turn</CardTitle>
               </CardHeader>
               <CardContent>
-                <Button onClick={nextPlayer} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button onClick={nextPlayer} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 mb-4">
                   Next Player
                 </Button>
                 <DiceRoller
