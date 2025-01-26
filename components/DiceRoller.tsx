@@ -89,7 +89,7 @@ export function DiceRoller({ onHistoryUpdate, playerHistory }: DiceRollerProps) 
       }
 
       // Gacha-like mechanics: 30% chance for a challenge
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.4) {
         const challenge = challenges[Math.floor(Math.random() * challenges.length)]
         setCurrentChallenge(challenge)
         setShowChallenge(true)
